@@ -9,7 +9,7 @@ class CallCountClock:
 
         return self.call_count
 
-
+# 下面是用法
 
 # 创建时钟对象
 clock = CallCountClock()
