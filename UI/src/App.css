@@ -1,0 +1,89 @@
+/* App.css */
+
+.App {
+  text-align: center;
+  font-family: Arial, sans-serif;
+}
+
+.navigation {
+  position: fixed;
+  top: 0;
+  width: 100%;
+  background: #282c34;
+  display: flex;
+  justify-content: center;
+  padding: 10px;
+  z-index: 1000;
+}
+
+.navigation button {
+  background: #61dafb;
+  border: none;
+  padding: 10px 20px;
+  margin: 0 10px;
+  font-size: 16px;
+  cursor: pointer;
+  color: #000;
+  border-radius: 5px;
+  transition: background 0.3s;
+}
+
+.navigation button.active {
+  background: #21a1f1;
+  color: white;
+}
+
+.navigation button:hover {
+  background: #21a1f1;
+}
+
+.section {
+  height: 100vh; /* 每部分高度占满视口 */
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background: #f0f0f0;
+  padding: 20px;
+  box-sizing: border-box;
+}
+
+.section h2 {
+  margin-bottom: 20px;
+  font-size: 2rem;
+  color: #333;
+}
+
+/* 欢迎页面样式 */
+.welcome-page {
+  height: 100vh; /* 占满视口 */
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background: linear-gradient(to right, #6a11cb, #2575fc);
+  color: white;
+  cursor: pointer;
+  transition: background 0.3s ease;
+}
+
+.welcome-page h1 {
+  font-size: 3rem;
+  margin-bottom: 20px;
+}
+
+.welcome-page p {
+  font-size: 1.5rem;
+  animation: fadeIn 1.5s infinite alternate;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0.6;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+
