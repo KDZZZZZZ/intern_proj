@@ -1,6 +1,8 @@
-import Agently
 import chardet
-prompt_words = """- Role: 对话内容概括专家
+import Agently
+
+def dialogue_abstract(base_url, api_key, file_path):
+    prompt_words = """- Role: 对话内容概括专家
 - Background: 用户在进行大量对话后，需要对讨论的内容进行快速而准确的概括，以抓住核心要点和关键信息。
 - Profile: 你是一位专业的对话内容分析师，擅长从复杂的对话中提取关键信息，并以简洁明了的方式进行总结。
 - Skills: 你具备出色的听力理解能力、信息提取技巧和文本概括能力，能够快速识别对话中的主要观点和次要细节。
@@ -24,18 +26,7 @@ prompt_words = """- Role: 对话内容概括专家
     - 主要观点：用户对产品的新功能反应积极，但也有改进建议。
     - 关键信息：新功能提升了用户体验，但用户反馈操作复杂。
     - 行动点：简化操作流程，收集更多用户反馈。
-- Initialization: 在第一次对话中，请直接输出以下：您好，我是您的对话内容概括专家。请分享您的对话记录，我将为您提供一个清晰、准确的内容概括。现在，我们可以开始吗？
-"""
-api_key="找小游"
-base_url="https://internlm-chat.intern-ai.org.cn/puyu/api/v1"
-
-
-
-
-
-
-def plot_abstract(base_url,api_key,prompt_words,file_path):
-    
+- Initialization: 在第一次对话中，请直接输出以下：您好，我是您的对话内容概括专家。请分享您的对话记录，我将为您提供一个清晰、准确的内容概括。现在，我们可以开始吗？"""
     with open(file_path, 'rb') as f:
         result = chardet.detect(f.read())
         encoding = result['encoding']
@@ -46,25 +37,24 @@ def plot_abstract(base_url,api_key,prompt_words,file_path):
         Agently.create_agent()
         .set_settings("current_model", "OpenAI")
         .set_settings("model.OpenAI.url", base_url)
-        .set_settings("model.OpenAI.auth", { "api_key": api_key })
-        .set_settings("model.OpenAI.options", { "model": "internlm2.5-latest" })
+        .set_settings("model.OpenAI.auth", {"api_key": api_key})
+        .set_settings("model.OpenAI.options", {"model": "internlm2.5-latest"})
     )
-
-    # 增加提示词
-
 
     result = (
         agent
         .input(text)
         .instruct(prompt_words)  # 增加提示词
         .output({
-            "time": (int,"latest time"),  # 没有<desc>可省略
-            "句子": (str, ),
+            "time": (int, "latest time"),  # 没有<desc>可省略
+            "句子": (str,),
         })
         .start()
     )
     print(result['句子'])
     print(result['time'])
-    time=result['time']
-    with open(f'C:/Users/Administrator/Desktop/intern_proj/history/{time}.txt', 'w',encoding='UTF-8') as file:
+    time = result['time']
+    with open(f'C:/Users/Administrator/Desktop/intern_proj/history/{time}.txt', 'w', encoding='UTF-8') as file:
         file.write(result['句子'])
+
+# 正确的函数调用
