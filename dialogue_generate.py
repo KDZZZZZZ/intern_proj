@@ -1,7 +1,7 @@
 import Agently
 from memory import MemoryManager
 
-api_key="eyJ0eXBlIjoiSldUIiwiYWxnIjoiSFM1MTIifQ.eyJqdGkiOiI1MDE5Mzg3MyIsInJvbCI6IlJPTEVfUkVHSVNURVIiLCJpc3MiOiJPcGVuWExhYiIsImlhdCI6MTczMjA4NTI4NSwiY2xpZW50SWQiOiJlYm1ydm9kNnlvMG5semFlazF5cCIsInBob25lIjoiMTU5NjQwMDgxMjciLCJ1dWlkIjoiZmUzZDA4ODktODJiYS00NGY4LTg0MWItMzNhZTZmMWMwYWVjIiwiZW1haWwiOiIiLCJleHAiOjE3NDc2MzcyODV9.zwMXSwIVijye9cv_79zm5Mrjv6CZsEBzUCM0QoRrtN_ZM1rjjVtGxdeacsp0sU-cIQp5CxSdym9Nb_MabfE4Kg"
+api_key="XiaoYou"
 base_url="https://internlm-chat.intern-ai.org.cn/puyu/api/v1"
 
 user_input='''
