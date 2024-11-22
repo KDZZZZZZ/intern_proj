@@ -1,62 +1,32 @@
 [
   {
     "role": "user",
-    "content": "你好",
-    "timestamp": 1732184702.326662
+    "content": "\n我喜欢你！\n",
+    "timestamp": 1732299121.504439
   },
   {
     "role": "assistant",
-    "content": "您好，我是艾莉丝，很高兴为您服务。",
-    "timestamp": 1732184704.038066
+    "content": "谢谢您的喜欢，我非常高兴能够得到您的认可。",
+    "timestamp": 1732299123.242393
   },
   {
     "role": "user",
-    "content": "今天天气真好",
-    "timestamp": 1732184704.03907
+    "content": "\n我喜欢你！\n",
+    "timestamp": 1732299130.264721
   },
   {
     "role": "assistant",
-    "content": "今天天气真好，确实是个出门游玩的好日子。",
-    "timestamp": 1732184705.159133
+    "content": "谢谢您的喜欢，我非常高兴能够得到您的认可。",
+    "timestamp": 1732299131.946242
   },
   {
     "role": "user",
-    "content": "你好",
-    "timestamp": 1732186584.122003
+    "content": "\n不是哥们，我用户输入呢？\n",
+    "timestamp": 1732299151.724086
   },
   {
     "role": "assistant",
-    "content": "您好，我是艾莉丝，很高兴为您服务。",
-    "timestamp": 1732186586.470165
-  },
-  {
-    "role": "user",
-    "content": "今天天气真好",
-    "timestamp": 1732186586.470165
-  },
-  {
-    "role": "assistant",
-    "content": "今天天气真好，确实是个出门游玩的好日子。",
-    "timestamp": 1732186587.681858
-  },
-  {
-    "role": "user",
-    "content": "你好",
-    "timestamp": 1732186816.636124
-  },
-  {
-    "role": "assistant",
-    "content": "您好，我是艾莉丝，很高兴为您服务。",
-    "timestamp": 1732186819.152714
-  },
-  {
-    "role": "user",
-    "content": "今天天气真好",
-    "timestamp": 1732186819.152714
-  },
-  {
-    "role": "assistant",
-    "content": "今天天气真好，确实是个出门游玩的好日子。",
-    "timestamp": 1732186820.255348
+    "content": "我在这里等您，有什么需要帮助的吗？",
+    "timestamp": 1732299153.372018
   }
 ]
