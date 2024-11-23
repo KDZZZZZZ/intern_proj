@@ -4,9 +4,7 @@ from memory import MemoryManager
 api_key="XiaoYou"
 base_url="https://internlm-chat.intern-ai.org.cn/puyu/api/v1"
 
-user_input='''
-不是哥们，我用户输入呢？
-'''
+user_input='''你好'''  #在这里输入用户提示词
 
 def create_agent_with_memory(base_url: str, api_key: str, memory_path: str):
     # 创建记忆管理器
