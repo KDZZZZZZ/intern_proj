@@ -1,7 +1,7 @@
 import chardet
 import Agently
 
-def dialogue_abstract(base_url, api_key, file_path):
+def dialogue_abstract(base_url, api_key, file_path,state):
     prompt_words = """- Role: 对话内容概括专家
 - Background: 用户在进行大量对话后，需要对讨论的内容进行快速而准确的概括，以抓住核心要点和关键信息。
 - Profile: 你是一位专业的对话内容分析师，擅长从复杂的对话中提取关键信息，并以简洁明了的方式进行总结。
@@ -52,9 +52,8 @@ def dialogue_abstract(base_url, api_key, file_path):
         .start()
     )
     print(result['句子'])
-    print(result['time'])
-    time = result['time']
-    with open(f'C:/Users/Administrator/Desktop/intern_proj/history/{time}.txt', 'w', encoding='UTF-8') as file:
-        file.write(result['句子'])
+
+    with open(f'C:/Users/Administrator/Desktop/intern_proj/history/{state}.txt', 'a', encoding='UTF-8') as file:
+        file.write(result['句子']+'\n')
 
 # 正确的函数调用
