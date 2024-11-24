@@ -1,5 +1,6 @@
 import hashlib
 import os
+import gen_plot
 
 global_files = {}
 
@@ -17,12 +18,15 @@ def generate_hash(file_path):
     except (FileNotFoundError, IOError, OSError):
         return None
 
-def add_file_to_folder_and_dict(folder_path, filename, content):
+def add_file_to_folder_and_dict(state_instance, content):
     """将文件添加到指定文件夹并加入全局字典"""
-    file_path = os.path.join(folder_path, filename)
-    os.makedirs(folder_path, exist_ok=True)
-    with open(file_path, 'w') as f:
-        f.write(content)
+    n = state_instance.get_state()
+        
+        # 生成文件列表
+    file_path = os.path.join('history', f'stage_{n}.txt')
+
+    with open(file_path, 'a') as f:
+        f.write('\n'+content)
     file_hash = generate_hash(file_path)
     if file_hash is not None:
         global_files[file_path] = file_hash

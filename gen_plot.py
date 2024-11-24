@@ -2,6 +2,7 @@ import Agently
 import numpy as np
 import chardet
 import os
+import history
 prompt = """- Role: 情节构建专家和对话创作大师
 - Background: 用户拥有一个小说的主要情节大纲，需要通过符合大纲逻辑的情节来丰富故事内容，特别是需要一段两人之间的交流情节来增强故事的深度和人物之间的关系。
 - Profile: 你是一位经验丰富的情节构建专家和对话创作大师，擅长通过对话来展现人物性格，推动情节发展，并增强读者的沉浸感。
@@ -25,7 +26,7 @@ prompt = """- Role: 情节构建专家和对话创作大师
 
 # 定义State类
 class State:
-    def __init__(self, directory='memory_store'):
+    def __init__(self, directory):
         self.directory = directory
         self.state = self._get_initial_state()
     
@@ -37,9 +38,9 @@ class State:
         states = [int(f.split('_')[1].split('.')[0]) for f in files]
         return max(states) + 1
     
-    def add_1(self):
+    def update(self,new_state):
         # 增加状态数
-        self.state += 1
+        self.state = new_state
     
     def get_state(self):
         # 获取当前状态数
@@ -50,7 +51,7 @@ class State:
         return np.arange(1, self.state + 1)
 
 # 处理状态文件并生成代理输出的主函数
-def process_states(state_instance, base_url, api_key, prompt):
+def generator(state_instance, base_url, api_key, prompt=prompt):
     """
     处理状态文件并生成代理输出。
 
@@ -68,7 +69,7 @@ def process_states(state_instance, base_url, api_key, prompt):
         n = state_instance.get_state()
         
         # 生成文件列表
-        file_list = [os.path.join(state_instance.directory, f'state_{i}.txt') for i in state_instance.state_list()]
+        file_list = [os.path.join(state_instance.directory, f'stage_{i}.txt') for i in state_instance.state_list()]
         
         # 收集所有状态文件的内容
         collected_text = ''
@@ -106,9 +107,15 @@ def process_states(state_instance, base_url, api_key, prompt):
         agent_output = result['句子']
         
         # 将代理的输出写入state_n_agent.txt文件
-        output_file_path = os.path.join(state_instance.directory, f'state_{n}_agent.txt')
-        with open(output_file_path, 'w', encoding='utf-8') as f:
+        output_file_path = os.path.join(state_instance.directory, f'stage_{n}.txt')
+        with open(output_file_path, 'w') as f:
             f.write(agent_output)
+        file_hash = history.generate_hash(file_path)
+        if file_hash is not None:
+            history.global_files[output_file_path] = file_hash
+            print(f"文件 {output_file_path} 已添加到全局字典中。")
+        else:
+            print(f"无法生成文件 {file_path} 的哈希值。")
         
         print(f"代理的输出已保存到 {output_file_path}")
         return agent_output
@@ -128,7 +135,7 @@ if __name__ == '__main__':
     prompt = '请总结提供的文本。'
     
     # 调用process_states函数处理状态文件
-    output = process_states(state_instance, base_url, api_key, prompt)
+    output = generator(state_instance, base_url, api_key, prompt)
     if output:
         print("处理完成。输出已保存。")
     

@@ -1,6 +1,30 @@
 import numpy as np
 from typing import Dict, Union
+personality = {
+    'Openness': 0.7,
+    'Conscientiousness': 0.6,
+    'Extraversion': 0.5,
+    'Agreeableness': 0.8,
+    'Neuroticism': 0.3
+}
+    
+topic_personality_weights = {
+    'Openness': 0.9,
+    'Conscientiousness': 0.6,
+    'Extraversion': 0.7,
+    'Agreeableness': 0.8,
+    'Neuroticism': 0.4
+}
 
+
+
+topic_mood_effect = {
+    'Valence': 0.7,
+    'Arousal': 0.3,
+    'Dominance': 0.5
+}
+
+affinity = 0.75
 class TopicActivationCalculator:
     """计算话题激活的类"""
     
@@ -16,12 +40,12 @@ class TopicActivationCalculator:
     DEFAULT_THRESHOLD = 0.6
 
     def __init__(
-        self,
-        personality: Dict[str, float],
-        personality_weights: Dict[str, float],
-        mood: Dict[str, float],
-        mood_effect: Dict[str, float],
-        affinity: float,
+        self, mood,
+        personality = personality,
+        personality_weights = topic_personality_weights,
+       
+        mood_effect = topic_mood_effect,
+        affinity = affinity,
         weights: Dict[str, float] = None,
         threshold: float = None
     ):

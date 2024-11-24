@@ -2,7 +2,7 @@ import time
 
 class CallCountClock:
     def __init__(self):
-        self.call_count = 0
+        self.call_count = 1
 
     def get_time(self):
         self.call_count += 1
