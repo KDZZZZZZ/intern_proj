@@ -127,14 +127,19 @@ def generator(state_instance, base_url, api_key, prompt=prompt):
 # 示例用法
 if __name__ == '__main__':
     # 用户创建State实例并管理状态
-    state_dir = 'memory_store'
+    state_dir = 'history'
     state_instance = State(directory=state_dir)
     
     base_url = 'https://api.openai.com/v1'
-    api_key = ''
-    prompt = '请总结提供的文本。'
-    
+    api_key = ""
+        
     # 调用process_states函数处理状态文件
+    output = generator(state_instance, base_url, api_key)
+    if output:
+        print("处理完成。输出已保存。")
+    
+    # 用户在需要时增加状态数
+    # state_instance.add_1()    # 调用process_states函数处理状态文件
     output = generator(state_instance, base_url, api_key, prompt)
     if output:
         print("处理完成。输出已保存。")
