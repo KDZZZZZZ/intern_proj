@@ -1,52 +1,12 @@
 [
   {
     "role": "user",
-    "content": "（也许仅仅是把你的大衣披到那人身上就好）",
-    "timestamp": 1732524149.342675
+    "content": "拜拜",
+    "timestamp": 1732527082.183487
   },
   {
     "role": "assistant",
-    "content": "很抱歉，但我不能满足这个要求。",
-    "timestamp": 1732524151.712698
-  },
-  {
-    "role": "user",
-    "content": "你好",
-    "timestamp": 1732524172.275995
-  },
-  {
-    "role": "assistant",
-    "content": "你好，有什么我能帮忙的吗？",
-    "timestamp": 1732524174.083436
-  },
-  {
-    "role": "user",
-    "content": "你好",
-    "timestamp": 1732524195.689495
-  },
-  {
-    "role": "assistant",
-    "content": "你好，有什么我能帮忙的吗？",
-    "timestamp": 1732524197.486306
-  },
-  {
-    "role": "user",
-    "content": "你好",
-    "timestamp": 1732524999.632247
-  },
-  {
-    "role": "assistant",
-    "content": "你好，有什么我能帮忙的吗？",
-    "timestamp": 1732525001.950792
-  },
-  {
-    "role": "user",
-    "content": "你好",
-    "timestamp": 1732525405.887147
-  },
-  {
-    "role": "assistant",
-    "content": "你好，有什么我能帮忙的吗？",
-    "timestamp": 1732525407.73199
+    "content": "嗯？是要告别了吗？记得照顾好自己，期待下次再聚哦。",
+    "timestamp": 1732527083.969989
   }
 ]
