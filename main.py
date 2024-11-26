@@ -63,7 +63,7 @@ def user_chat(input):
     result = game_state.oneesan.chat(input)
     print(result["句子"])
 
-    if game_state.clock_instance.get_time() == 10:
+    if game_state.clock_instance.get_time() %10 == 0:
         dialogue_abstract.dialogue_abstract(
         base_url,
         api_key,
