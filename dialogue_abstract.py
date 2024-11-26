@@ -53,7 +53,7 @@ def dialogue_abstract(base_url, api_key, file_path,state):
     )
     print(result['句子'])
 
-    with open(f'C:/Users/Administrator/Desktop/intern_proj/history/{state}.txt', 'a', encoding='UTF-8') as file:
+    with open(f'intern_proj/history/{state}.txt', 'a', encoding='UTF-8') as file:
         file.write(result['句子']+'\n')
 
 # 正确的函数调用

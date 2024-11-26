@@ -32,7 +32,7 @@ def user_select_screenplay(screenplay):
     )
     match screenplay:
         case "A screenplay":
-            game_state.state_instance = gen_plot.State("C:/Users/Administrator/Desktop/intern_proj/history")
+            game_state.state_instance = gen_plot.State("history")
             game_state.oneesan = Oneesan(api_key=api_key, base_url=base_url)
     
     plot = gen_plot.generator(game_state.state_instance, base_url, api_key)
@@ -41,7 +41,7 @@ def user_select_screenplay(screenplay):
         return
     
     #第一组对话
-    file_path = 'C:/Users/Administrator/Desktop/intern_proj/history/stage_1.txt'
+    file_path = 'history/stage_1.txt'
     if os.path.exists(file_path):
         # 使用二进制模式读取UTF-8编码的文件
         with open(file_path, 'rb') as f:
@@ -49,7 +49,7 @@ def user_select_screenplay(screenplay):
             
         game_state.custom_prompts = text
         game_state.oneesan = Oneesan(api_key=api_key, base_url=base_url, custom_prompt={"情景": game_state.custom_prompts})
-        result = game_state.oneesan.chat("说说发生了什么")
+        result = game_state.oneesan.chat("详细地概括一下剧情，着重于人物的心理，情感变化以及人际关系")
         print(result["句子"])
         print(game_state.oneesan.get_mood())
         mood = game_state.oneesan.get_mood()
@@ -67,7 +67,7 @@ def user_chat(input):
         dialogue_abstract.dialogue_abstract(
         base_url,
         api_key,
-        'C:/Users/Administrator/Desktop/intern_proj/Oneesan/memory.txt',
+        'Oneesan/memory.txt',
         current_state
         )
         game_state.oneesan.clear_memory()  # 使用实例方法而不是类方法
@@ -85,7 +85,7 @@ def user_chat(input):
     should_activate = stimulate_calculator.calculate_activation()
     if should_activate:
         similar_texts = game_state.similarity_instance.find_similar_in_history(
-        source_text="你好，今天天气真好",
+        source_text="怀",
         stage=current_state,  # 会在stage 3到stage 1的内容中查找
         top_k=1,
         threshold=0.8
@@ -123,7 +123,7 @@ def next():
         gen_plot.generator(game_state.state_instance, base_url, api_key)
     game_state.custom_prompts = next_scene
     game_state.oneesan = Oneesan(api_key=api_key, base_url=base_url, custom_prompt={"情景": game_state.custom_prompts})
-    result = game_state.oneesan.chat("说说发生了什么")
+    result = game_state.oneesan.chat("详细地概括一下剧情，着重于人物的心理，情感变化以及人际关系")
     print(result)
 
 def test_state():
