@@ -76,13 +76,12 @@ def generator(state_instance, base_url, api_key, prompt=prompt):
         for file_path in file_list:
             if os.path.exists(file_path):
                 with open(file_path, 'rb') as f:
-                    result = chardet.detect(f.read())
-                    encoding = result['encoding']
-                with open(file_path, 'r', encoding=encoding) as f:
-                    text = f.read()
-                    collected_text += text + '\n'  # 文件间加换行符
-        
-
+                    raw_data = f.read()
+                    if raw_data:
+                        result = chardet.detect(raw_data)
+                        encoding = result['encoding'] if result['encoding'] else 'utf-8'
+                        text = raw_data.decode(encoding)
+                        collected_text += text + '\n'  # 文件间加换行符
         
         agent = (
             Agently.create_agent()
@@ -98,30 +97,41 @@ def generator(state_instance, base_url, api_key, prompt=prompt):
             .instruct(prompt)
             .input(collected_text)
             .output({
-                "句子": (str,)
+                "句子": (str,"生成一个连贯的情景，一句话概括")
             })
             .start()
         )
         
+        if result is None or '句子' not in result:
+            print("生成对话失败")
+            return None
+            
         # 获取代理的输出
         agent_output = result['句子']
         
         # 将代理的输出写入state_n_agent.txt文件
         output_file_path = os.path.join(state_instance.directory, f'stage_{n}.txt')
-        with open(output_file_path, 'w') as f:
-            f.write(agent_output)
-        file_hash = history.generate_hash(file_path)
+        
+        # 确保目录存在
+        os.makedirs(os.path.dirname(output_file_path), exist_ok=True)
+        
+        # 写入新内容
+        with open(output_file_path, 'a', encoding='utf-8') as f:
+            f.write('\n' + agent_output)
+            
+        # 生成文件哈希
+        file_hash = history.generate_hash(output_file_path)
         if file_hash is not None:
             history.global_files[output_file_path] = file_hash
             print(f"文件 {output_file_path} 已添加到全局字典中。")
         else:
-            print(f"无法生成文件 {file_path} 的哈希值。")
+            print(f"无法生成文件 {output_file_path} 的哈希值。")
         
         print(f"代理的输出已保存到 {output_file_path}")
         return agent_output
     
     except Exception as e:
-        print(f"发生错误: {e}")
+        print(f"发生错误: {str(e)}")
         return None
 
 # 示例用法

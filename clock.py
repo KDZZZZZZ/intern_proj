@@ -5,8 +5,10 @@ class CallCountClock:
         self.call_count = 1
 
     def get_time(self):
+        return self.call_count
+        
+    def increment(self):
         self.call_count += 1
-
         return self.call_count
 
 # 下面是用法

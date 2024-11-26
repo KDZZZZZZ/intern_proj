@@ -2,8 +2,8 @@ import math
 
 class Favorability:
     def __init__(self, moodvads):
-        self.moodvads = moodvads  # 情绪变化记录 (V, A, D)
-        self.favorability = 50  # 初始好感度
+        self.moodvads = [(moodvads[0], moodvads[1], moodvads[2])]
+        self.favorability = 50  # 初始好感度保持在50
         self.history_weights = []  # 用于平滑处理的权重
 
     def add_change(self, moodvad):
@@ -29,19 +29,18 @@ class Favorability:
 
     def get_favorability(self):
         """根据情绪变化记录计算稳定的好感度"""
-        base_favorability = 50  # 初始基准
         trend = self.calculate_trend()  # 平滑后的情绪趋势
         delta = trend - 5  # 假设 5 为中性情绪
-        stability_factor = 0.8  # 控制好感度变化幅度
+        stability_factor = 0.2  # 降低好感度变化幅度
         self.favorability += delta * stability_factor
 
         # 高好感度时的衰减机制
         if self.favorability > 75:
-            self.favorability -= (self.favorability - 75) * 0.5
+            self.favorability -= (self.favorability - 75) * 0.1
 
         # 低好感度时的修复机制
         if self.favorability < 25:
-            self.favorability += (25 - self.favorability) * 0.5
+            self.favorability += (25 - self.favorability) * 0.1
 
         # 限制好感度范围
         self.favorability = max(0, min(100, self.favorability))
@@ -49,6 +48,3 @@ class Favorability:
 
 
 # 示例使用
-
-
-        

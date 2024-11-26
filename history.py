@@ -1,6 +1,7 @@
 import hashlib
 import os
 import gen_plot
+import random
 
 global_files = {}
 
@@ -34,30 +35,20 @@ def add_file_to_folder_and_dict(state_instance, content):
     else:
         print(f"无法生成文件 {file_path} 的哈希值。")
 
-def select_file(random_number):
-    """根据哈希值和随机数选择一个文件"""
-    if not global_files:
+def select_file(stage: int) -> str:
+    """随机选择从stage_1到stage_n中的一个文件"""
+    if stage < 1:
         return None
-
-    # 先过滤出有效的哈希值
-    valid_files = {
-        filename: hash_value 
-        for filename, hash_value in global_files.items() 
-        if hash_value is not None
-    }
-
+        
+    # 获取所有存在的文件
+    valid_files = []
+    for i in range(1, stage + 1):
+        file_path = os.path.join('history', f'stage_{i}.txt')
+        if os.path.exists(file_path):
+            valid_files.append(file_path)
+    
     if not valid_files:
         return None
-
-    try:
-        # 计算选择分数
-        selection_scores = {
-            filename: int(hash_value, 16) % random_number
-            for filename, hash_value in valid_files.items()
-        }
-        
-        # 选取得分最小的文件
-        return min(selection_scores, key=selection_scores.get)
-    except (ValueError, TypeError) as e:
-        print(f"Error calculating selection scores: {e}")
-        return None
+    
+    # 随机选择一个文件
+    return random.choice(valid_files)
