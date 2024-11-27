@@ -9,7 +9,8 @@ import similarity
 import chardet
 import os
 
-api_key = ""
+# 全局变量
+api_key = "YOUR_API_KEY"
 base_url = "https://internlm-chat.intern-ai.org.cn/puyu/api/v1"
 
 class GameState:
@@ -125,6 +126,7 @@ def next():
     game_state.oneesan = Oneesan(api_key=api_key, base_url=base_url, custom_prompt={"情景": game_state.custom_prompts})
     result = game_state.oneesan.chat("详细地概括一下剧情，着重于人物的心理，情感变化以及人际关系")
     print(result)
+    return result["句子"]
 
 def test_state():
     # 初始化剧本
