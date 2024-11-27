@@ -62,36 +62,36 @@ def user_chat(input):
     current_state = game_state.state_instance.get_state()
     result = game_state.oneesan.chat(input)
     print(result["句子"])
-
+    mood = game_state.oneesan.get_mood()
+    print(mood)
+    game_state.favorability_instance.add_change(mood)
     if game_state.clock_instance.get_time() %10 == 0:
-        dialogue_abstract.dialogue_abstract(
+        abstract_text = dialogue_abstract.dialogue_abstract(
         base_url,
         api_key,
         'Oneesan/memory.txt',
         current_state
         )
         game_state.oneesan.clear_memory()  # 使用实例方法而不是类方法
-    
-    game_state.favorability_instance.add_change(game_state.oneesan.get_mood())
-    # 检查是否需要触发刺激
-    mood = game_state.oneesan.get_mood()
-    print(mood)
-    mood_dict = {
-    'Valence': mood[0],
-    'Arousal': mood[1],
-    'Dominance': mood[2]
-}
-    stimulate_calculator = stimulate.TopicActivationCalculator(mood_dict)
-    should_activate = stimulate_calculator.calculate_activation()
-    if should_activate:
-        similar_texts = game_state.similarity_instance.find_similar_in_history(
-        source_text="怀",
-        stage=current_state,  # 会在stage 3到stage 1的内容中查找
-        top_k=1,
-        threshold=0.8
-        )
-        if similar_texts:
-            game_state.custom_prompts = game_state.custom_prompts+similar_texts
+        mood_dict = {
+        'Valence': mood[0],
+        'Arousal': mood[1],
+        'Dominance': mood[2]
+        }
+        stimulate_calculator = stimulate.TopicActivationCalculator(mood_dict)
+        should_activate = stimulate_calculator.calculate_activation()
+        if should_activate:
+            similar_texts = game_state.similarity_instance.find_similar_in_history(
+            source_text=abstract_text,
+            stage=current_state,  # 会在stage 3到stage 1的内容中查找
+            top_k=1,
+            threshold=0.8
+            )
+            if similar_texts:
+                game_state.custom_prompts = game_state.custom_prompts+similar_texts
+
+
+
 
 
 def next():
