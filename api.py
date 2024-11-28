@@ -99,7 +99,7 @@ async def set_api_key(request: ApiKeyRequest):
 async def initialize():
     try:
         # 设置API密钥和base_url（使用测试中的值）
-        main.api_key = "YOUR_API_KEY"
+        main.api_key = " "
         main.base_url = "https://internlm-chat.intern-ai.org.cn/puyu/api/v1"
         
         # 选择剧本并初始化

@@ -10,7 +10,7 @@ import chardet
 import os
 
 # 全局变量
-api_key = "YOUR_API_KEY"
+api_key = " "
 base_url = "https://internlm-chat.intern-ai.org.cn/puyu/api/v1"
 
 class GameState:
