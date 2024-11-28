@@ -9,6 +9,7 @@ class Oneesan:
         self.memory_path = memory_path
         self.custom_prompt = custom_prompt or {}
         self.agent, self.chat_func, self.memory = self._create_agent_with_memory()
+        self.last_response = None  # 存储最后一次响应
 
     def _create_agent_with_memory(self):
         # 创建记忆管理器
@@ -86,8 +87,12 @@ class Oneesan:
         return agent, chat, memory
 
     def chat(self, user_input: str):
-        """进行对话并返回结果"""
-        return self.chat_func(user_input)
+        result = self.chat_func(user_input)
+        self.last_response = result["句子"] if isinstance(result["句子"], str) else result["句子"][0]
+        return result
+
+    def get_last_response(self):
+        return self.last_response
 
     def clear_memory(self):
         """清空历史记录"""
@@ -110,7 +115,7 @@ def read_input(input_file: str = 'Oneesan/input.txt') -> str:
 
 def main():
     # API配置
-    api_key = "XiaoYou"  # 需要替换为实际的API密钥
+    api_key = ""  # 需要替换为实际的API密钥
     base_url = "https://internlm-chat.intern-ai.org.cn/puyu/api/v1"
     
     # 创建Oneesan实例

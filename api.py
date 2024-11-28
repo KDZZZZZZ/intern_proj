@@ -47,7 +47,6 @@ async def chat(input: str = None, request: ChatRequest = None):
         main.user_chat(chat_input)
         
         # 获取最新的状态信息
-        response = main.game_state.oneesan.chat(chat_input)["句子"]
         mood = main.game_state.oneesan.get_mood()
         favorability = main.game_state.favorability_instance.get_favorability()
         clock = main.game_state.clock_instance.get_time()
@@ -55,7 +54,7 @@ async def chat(input: str = None, request: ChatRequest = None):
         
         # 使用JSONResponse并确保正确的编码
         return JSONResponse(content={
-            "response": response,
+            "response": main.game_state.oneesan.get_last_response(),
             "mood": mood,
             "favorability": favorability,
             "clock": clock,
@@ -99,7 +98,7 @@ async def set_api_key(request: ApiKeyRequest):
 async def initialize():
     try:
         # 设置API密钥和base_url（使用测试中的值）
-        main.api_key = " "
+        main.api_key = ""
         main.base_url = "https://internlm-chat.intern-ai.org.cn/puyu/api/v1"
         
         # 选择剧本并初始化
