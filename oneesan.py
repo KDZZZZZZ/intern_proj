@@ -97,6 +97,10 @@ class Oneesan:
     def clear_memory(self):
         """清空历史记录"""
         self.memory.clear()
+        
+    def remove_earliest_memory(self):
+        """删除最早的一条记忆"""
+        self.memory.remove_earliest_message()
 
     @staticmethod
     def get_mood() -> list:
