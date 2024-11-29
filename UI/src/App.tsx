@@ -1,15 +1,15 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import "./App.css";
 import Initialization from "./components/Initialization";
 import DailyInteraction from "./components/DailyInteraction";
+import ChatPage from "./components/ChatPage";
 
 function App() {
-  const [isWelcomePage, setIsWelcomePage] = useState(true); // 状态控制是否显示欢迎页
-  const [currentSection, setCurrentSection] = useState<"initialization" | "daily">("initialization");
+  const [isWelcomePage, setIsWelcomePage] = useState(true); // 控制欢迎页状态
+  const [currentSection, setCurrentSection] = useState<"initialization" | "daily" | "chat">("initialization");
 
-  // 点击事件处理函数
   const handleWelcomeClick = () => {
-    setIsWelcomePage(false); // 隐藏欢迎页，进入主功能页面
+    setIsWelcomePage(false); // 隐藏欢迎页面
   };
 
   return (
@@ -17,8 +17,8 @@ function App() {
       {/* 欢迎页面 */}
       {isWelcomePage ? (
         <div className="welcome-page" onClick={handleWelcomeClick}>
-          <h1>welcome to try something we create</h1>
-          <p>please click</p>
+          <h1>欢迎来到我的应用！</h1>
+          <p>点击任意位置开始体验</p>
         </div>
       ) : (
         <>
@@ -36,21 +36,32 @@ function App() {
             >
               Daily Interaction
             </button>
+            <button
+              onClick={() => setCurrentSection("chat")}
+              className={currentSection === "chat" ? "active" : ""}
+            >
+              Chat Page
+            </button>
           </div>
 
-          {/* 初始化界面 */}
+          {/* 初始化页面 */}
           {currentSection === "initialization" && (
             <section className="section">
-              <h2>Initialization Section</h2>
               <Initialization />
             </section>
           )}
 
-          {/* 日常交互界面 */}
+          {/* 日常交互页面 */}
           {currentSection === "daily" && (
             <section className="section">
-              <h2>Daily Interaction Section</h2>
               <DailyInteraction />
+            </section>
+          )}
+
+          {/* 对话页面 */}
+          {currentSection === "chat" && (
+            <section className="section">
+              <ChatPage />
             </section>
           )}
         </>
@@ -60,6 +71,8 @@ function App() {
 }
 
 export default App;
+
+
 
 
 
