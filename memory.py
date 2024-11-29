@@ -7,12 +7,12 @@ from datetime import datetime
 class Message:
     role: str  # 'user' 或 'assistant'
     content: str
-    timestamp: float = None
+    timestamp: str = None
     
     def __post_init__(self):
         if self.timestamp is None:
-            self.timestamp = datetime.now().timestamp()
-
+            self.timestamp = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
+    
 class MemoryManager:
     def __init__(self, max_messages: int = 100, persistence_path: Optional[str] = None):
         self.max_messages = max_messages
@@ -46,12 +46,20 @@ class MemoryManager:
         self.messages.clear()
         if self.persistence_path:
             self.save_to_file()
+            
+    def remove_earliest_message(self) -> None:
+        """删除最早的一条消息"""
+        if self.messages:
+            self.messages.pop(0)
+            if self.persistence_path:
+                self.save_to_file()
     
     def save_to_file(self) -> None:
         """将消息保存到文件"""
         if not self.persistence_path:
             return
-            
+        
+        # 将消息转换为字典列表
         data = [
             {
                 "role": msg.role,
@@ -61,6 +69,7 @@ class MemoryManager:
             for msg in self.messages
         ]
         
+        # 保存到文件
         with open(self.persistence_path, 'w', encoding='utf-8') as f:
             json.dump(data, f, ensure_ascii=False, indent=2)
     
@@ -79,10 +88,3 @@ class MemoryManager:
                 ]
         except (FileNotFoundError, json.JSONDecodeError):
             self.messages = []
-
-
-
-
-
-
-

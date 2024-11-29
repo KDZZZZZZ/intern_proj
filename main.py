@@ -10,7 +10,7 @@ import chardet
 import os
 
 # 全局变量
-api_key = " "
+api_key = " eyJ0eXBlIjoiSldUIiwiYWxnIjoiSFM1MTIifQ.eyJqdGkiOiI1MDE5Mzg3MyIsInJvbCI6IlJPTEVfUkVHSVNURVIiLCJpc3MiOiJPcGVuWExhYiIsImlhdCI6MTczMjUzNTA0OSwiY2xpZW50SWQiOiJlYm1ydm9kNnlvMG5semFlazF5cCIsInBob25lIjoiMTU5NjQwMDgxMjciLCJ1dWlkIjoiM2UxY2Y5MmUtOTA4NC00ZDI0LWI5MWEtZGI2NjlmY2M1NWM3IiwiZW1haWwiOiIiLCJleHAiOjE3NDgwODcwNDl9.YcS6spF3Qy7DcgNEAMWulOPNKIlhSTJtylCNv3hJUoaXYem-BTpk10qm6bKXor7Orb1iV3esfeuwcCL7535tzg"
 base_url = "https://internlm-chat.intern-ai.org.cn/puyu/api/v1"
 
 class GameState:
@@ -66,14 +66,14 @@ def user_chat(input):
     mood = game_state.oneesan.get_mood()
     print(mood)
     game_state.favorability_instance.add_change(mood)
-    if game_state.clock_instance.get_time() %10 == 0:
+    if game_state.clock_instance.get_time() > 30:
         abstract_text = dialogue_abstract.dialogue_abstract(
         base_url,
         api_key,
         'Oneesan/memory.txt',
         current_state
         )
-        game_state.oneesan.clear_memory()  # 使用实例方法而不是类方法
+        game_state.oneesan.remove_earliest_memory()  # 改用删除最早记忆的方法
         mood_dict = {
         'Valence': mood[0],
         'Arousal': mood[1],
