@@ -89,7 +89,7 @@ def user_chat(input):
             threshold=0.8
             )
             if similar_texts:
-                game_state.custom_prompts = game_state.custom_prompts+"接下来是一段回忆，你需要在对话中向对方诉说：\n"+similar_texts
+                game_state.custom_prompts = game_state.custom_prompts+similar_texts
 
 
 
