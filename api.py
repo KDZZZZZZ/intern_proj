@@ -140,14 +140,14 @@ async def set_api_key(request: ApiKeyRequest):
 async def initialize():
     try:
         # 设置API密钥和base_url（使用测试中的值）
-        main.api_key = ""
+        main.api_key = "API填在这里"
         main.base_url = "https://internlm-chat.intern-ai.org.cn/puyu/api/v1"
         
         # 选择剧本并初始化
         main.user_select_screenplay("A screenplay")
         
         # 获取所有状态信息
-        response = main.game_state.oneesan.chat("你是谁？")["句子"]  # 获取初始对话
+        response = main.game_state.oneesan.chat("哎呀，小朋友，摔疼了吧？要不要来我家坐坐？（月芙的栗色长发散落脸前，我呆呆地望着她，痴痴地伸出手）")["句子"]  # 获取初始对话
         mood = main.game_state.oneesan.get_mood()
         favorability = main.game_state.favorability_instance.get_favorability()
         clock = main.game_state.clock_instance.get_time()
