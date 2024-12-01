@@ -147,7 +147,7 @@ async def initialize():
         main.user_select_screenplay("A screenplay")
         
         # 获取所有状态信息
-        response = main.game_state.oneesan.chat("")["句子"]  # 获取初始对话
+        response = main.game_state.oneesan.chat("你是谁？")["句子"]  # 获取初始对话
         mood = main.game_state.oneesan.get_mood()
         favorability = main.game_state.favorability_instance.get_favorability()
         clock = main.game_state.clock_instance.get_time()
