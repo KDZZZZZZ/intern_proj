@@ -37,12 +37,12 @@ def save_response_to_file(endpoint: str, response_data: Dict[str, Any]):
     
     # 创建新的响应数据结构
     all_responses = {}
-    timestamp = datetime.now().strftime("%Y%m%d_%H%M%S")
+    
+    # 添加时间戳到响应数据中
+    response_data['timestamp'] = datetime.now().strftime("%Y%m%d_%H%M%S")
     
     # 设置新的响应数据
-    all_responses[endpoint] = {
-        timestamp: response_data
-    }
+    all_responses[endpoint] = response_data
     
     # 直接写入新文件，覆盖旧内容
     try:
