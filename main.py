@@ -50,7 +50,7 @@ def user_select_screenplay(screenplay):
             
         game_state.custom_prompts = text
         game_state.oneesan = Oneesan(api_key=api_key, base_url=base_url, custom_prompt={"情景": game_state.custom_prompts})
-        result = game_state.oneesan.chat("详细地概括一下剧情，着重于人物的心理，情感变化以及人际关系")
+        result = game_state.oneesan.chat("请你根据前面的剧情喝对话，合理地预测接下来的剧情，并且月芙主动向用户说话。要求：200字左右，请保留之前的人设和记忆、文笔。")
         print(result["句子"])
         print(game_state.oneesan.get_mood())
         mood = game_state.oneesan.get_mood()
@@ -124,7 +124,7 @@ def next():
         gen_plot.generator(game_state.state_instance, base_url, api_key)
     game_state.custom_prompts = next_scene
     game_state.oneesan = Oneesan(api_key=api_key, base_url=base_url, custom_prompt={"情景": game_state.custom_prompts})
-    result = game_state.oneesan.chat("详细地概括一下剧情，着重于人物的心理，情感变化以及人际关系")
+    result = game_state.oneesan.chat("请你根据前面的剧情喝对话，合理地预测接下来的剧情，并且月芙主动向用户说话。要求：200字左右，请保留之前的人设和记忆、文笔。")
     print(result)
     return result["句子"]
 
