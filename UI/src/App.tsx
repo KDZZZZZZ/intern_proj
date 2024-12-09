@@ -1,9 +1,7 @@
 import { useState } from "react";
 import "./App.css";
 import Initialization from "./components/Initialization";
-import DailyInteraction from "./components/DailyInteraction";
-import ChatPage from "./components/ChatPage";
-
+import Front from "./components/Chat";
 function App() {
   const [isWelcomePage, setIsWelcomePage] = useState(true); // 控制欢迎页状态
   const [currentSection, setCurrentSection] = useState<"initialization" | "daily" | "chat">("initialization");
@@ -24,24 +22,7 @@ function App() {
         <>
           {/* 导航部分 */}
           <div className="navigation">
-            <button
-              onClick={() => setCurrentSection("initialization")}
-              className={currentSection === "initialization" ? "active" : ""}
-            >
-              Initialization
-            </button>
-            <button
-              onClick={() => setCurrentSection("daily")}
-              className={currentSection === "daily" ? "active" : ""}
-            >
-              Daily Interaction
-            </button>
-            <button
-              onClick={() => setCurrentSection("chat")}
-              className={currentSection === "chat" ? "active" : ""}
-            >
-              Chat Page
-            </button>
+           Welcome to OpenStarRail
           </div>
 
           {/* 初始化页面 */}
@@ -51,19 +32,6 @@ function App() {
             </section>
           )}
 
-          {/* 日常交互页面 */}
-          {currentSection === "daily" && (
-            <section className="section">
-              <DailyInteraction />
-            </section>
-          )}
-
-          {/* 对话页面 */}
-          {currentSection === "chat" && (
-            <section className="section">
-              <ChatPage />
-            </section>
-          )}
         </>
       )}
     </div>

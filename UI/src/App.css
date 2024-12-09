@@ -1,7 +1,6 @@
 /* App.css */
 
 .App {
-  text-align: center;
   font-family: Arial, sans-serif;
 }
 
@@ -14,6 +13,8 @@
   justify-content: center;
   padding: 10px;
   z-index: 1000;
+  color: rgb(248, 224, 224);
+  font-weight: bolder;
 }
 
 .navigation button {
