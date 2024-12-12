@@ -28,7 +28,7 @@ def user_select_screenplay(screenplay):
 
     game_state.clock_instance = clock.CallCountClock()  # 初始为1
     game_state.similarity_instance = similarity.TextSimilarity(
-        api_key=api_key,
+        api_key="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",
         history_dir="history"  # 指定历史记录目录
     )
     match screenplay:
@@ -50,7 +50,7 @@ def user_select_screenplay(screenplay):
             
         game_state.custom_prompts = text
         game_state.oneesan = Oneesan(api_key=api_key, base_url=base_url, custom_prompt={"情景": game_state.custom_prompts})
-        result = game_state.oneesan.chat("请你根据前面的剧情喝对话，合理地预测接下来的剧情，并且月芙主动向用户说话。要求：200字左右，请保留之前的人设和记忆、文笔。")
+        result = game_state.oneesan.chat("请你根据{custom_prompt}，对对方倾诉你的想法，引诱对方和你交流")
         print(result["句子"])
         print(game_state.oneesan.get_mood())
         mood = game_state.oneesan.get_mood()
